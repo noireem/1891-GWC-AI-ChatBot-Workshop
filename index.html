@@ -1,0 +1,60 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Chatbot - Girls Who Code</title>
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- Load the Poppins font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+</head>
+  <body>
+    <!-- ============================= -->
+    <!--      CHATBOT WEB PAGE         -->
+    <!-- ============================= -->
+
+    <div id="app">
+      <!-- The chat window header shows the bot's name and personality -->
+      <header class="chat-header">
+        <div class="bot-avatar">🤖</div>
+        <div class="bot-info">
+          <h1 id="bot-name-display">Nova</h1>
+          <p id="bot-personality-display">friendly and curious</p>
+        </div>
+        <div class="status-dot" title="online"></div>
+      </header>
+
+      <!-- This is where chat messages will appear -->
+      <main id="chat-window" class="chat-window">
+        <!-- Messages get added here by JavaScript -->
+      </main>
+
+      <!-- The area where the user types a message -->
+      <footer class="chat-input-area">
+        <input
+          type="text"
+          id="user-input"
+          placeholder="Type a message..."
+          autocomplete="off"
+        />
+        <button id="send-button" aria-label="Send message">
+          <span>Send</span>
+        </button>
+      </footer>
+    </div>
+
+    <!-- Link to our JavaScript file -->
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>

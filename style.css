@@ -1,0 +1,303 @@
+/* ============================= */
+/*       CHATBOT STYLES          */
+/* ============================= */
+
+/* These colors set the overall look of the page */
+:root {
+  --primary: #ff6b9d;
+  --primary-dark: #e84d80;
+  --primary-light: #ffc2d6;
+  --secondary: #6bb5ff;
+  --secondary-dark: #4a9bf0;
+  --bg-top: #ffeef5;
+  --bg-bottom: #e6f1ff;
+  --chat-bg: #ffffff;
+  --user-bubble: #ff6b9d;
+  --user-text: #ffffff;
+  --bot-bubble: #f0f4ff;
+  --bot-text: #3a3a52;
+  --text-main: #4a4a5e;
+  --border: #ffd6e5;
+  --shadow: 0 10px 40px rgba(255, 107, 157, 0.18);
+  --typing-dot: #c0c0d8;
+}
+
+/* Reset basic styles so everything looks consistent */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", "Nunito", system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, var(--bg-top), var(--bg-bottom));
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  color: var(--text-main);
+}
+
+/* The main chat container — like a phone screen */
+#app {
+  width: 100%;
+  max-width: 420px;
+  height: 85vh;
+  max-height: 720px;
+  background: var(--chat-bg);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 214, 229, 0.6);
+}
+
+/* ============================= */
+/*         HEADER                */
+/* ============================= */
+
+.chat-header {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+}
+
+.bot-avatar {
+  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.25);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.bot-info {
+  flex: 1;
+}
+
+.bot-info h1 {
+  font-size: 1.3rem;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.bot-info p {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 400;
+}
+
+/* Small green dot showing the bot is "online" */
+.status-dot {
+  width: 12px;
+  height: 12px;
+  background: #4ade80;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ============================= */
+/*       CHAT WINDOW              */
+/* ============================= */
+
+.chat-window {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: linear-gradient(180deg, #fff9fb, #f5f9ff);
+  scroll-behavior: smooth;
+}
+
+/* Each message bubble */
+.message {
+  max-width: 78%;
+  padding: 11px 17px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  animation: fade-in-up 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Messages from the bot appear on the left */
+.message.bot {
+  align-self: flex-start;
+  background: var(--bot-bubble);
+  color: var(--bot-text);
+  border-bottom-left-radius: 6px;
+  box-shadow: 0 2px 8px rgba(107, 181, 255, 0.1);
+}
+
+/* Messages from the user appear on the right */
+.message.user {
+  align-self: flex-end;
+  background: var(--user-bubble);
+  color: var(--user-text);
+  border-bottom-right-radius: 6px;
+  box-shadow: 0 2px 8px rgba(255, 107, 157, 0.2);
+}
+
+/* The little bot avatar next to bot messages */
+.message.bot::before {
+  content: "🤖";
+  margin-right: 6px;
+}
+
+/* Smooth fade-in animation when a message appears */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ============================= */
+/*     TYPING INDICATOR           */
+/* ============================= */
+
+.typing-indicator {
+  align-self: flex-start;
+  display: flex;
+  gap: 5px;
+  padding: 14px 18px;
+  background: var(--bot-bubble);
+  border-radius: 20px;
+  border-bottom-left-radius: 6px;
+  animation: fade-in-up 0.3s ease;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: var(--typing-dot);
+  border-radius: 50%;
+  animation: typing-bounce 1.3s infinite;
+}
+
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-7px); opacity: 1; }
+}
+
+/* ============================= */
+/*       INPUT AREA              */
+/* ============================= */
+
+.chat-input-area {
+  display: flex;
+  padding: 14px 16px;
+  gap: 10px;
+  background: #ffffff;
+  border-top: 1px solid var(--border);
+}
+
+#user-input {
+  flex: 1;
+  padding: 13px 18px;
+  border: 2px solid var(--border);
+  border-radius: 26px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  font-weight: 400;
+  color: var(--text-main);
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+#user-input::placeholder {
+  color: #c0a8b8;
+}
+
+#user-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.12);
+}
+
+#send-button {
+  padding: 13px 22px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #ffffff;
+  border: none;
+  border-radius: 26px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s, filter 0.18s;
+  white-space: nowrap;
+}
+
+#send-button:hover {
+  transform: scale(1.06) translateY(-1px);
+  box-shadow: 0 6px 18px rgba(255, 107, 157, 0.35);
+  filter: brightness(1.05);
+}
+
+#send-button:active {
+  transform: scale(0.94);
+}
+
+/* ============================= */
+/*       SCROLLBAR                */
+/* ============================= */
+
+.chat-window::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 10px;
+}
+
+.chat-window::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ============================= */
+/*       RESPONSIVE              */
+/* ============================= */
+
+@media (max-width: 480px) {
+  body {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  #app {
+    height: 100vh;
+    max-height: none;
+    border-radius: 0;
+    border: none;
+  }
+
+  .message {
+    max-width: 85%;
+  }
+}
